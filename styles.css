@@ -1,0 +1,1092 @@
+:root {
+    --primary-color: #4a6bff; /* More vibrant blue */
+    --secondary-color: #3451d1; /* Deeper blue */
+    --accent-color: #5cbbff; /* Brighter accent */
+    --text-color: #2c3e50; /* Keeping good contrast */
+    --light-text: #7f8c8d; /* Keeping good contrast */
+    --background-color: #f8faff; /* Slightly bluer background */
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --shadow-color: rgba(74, 107, 255, 0.15); /* Colored shadow */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding-bottom: 70px; /* Space for bottom nav */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logo i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+header p {
+    color: var(--light-text);
+    font-size: 1.1rem;
+}
+
+/* Card Styles */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Form Styles */
+.measurement-form h2,
+.measurements-list h2,
+.search-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.measurement-form h2 i,
+.measurements-list h2 i,
+.search-section h2 i {
+    margin-right: 10px;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    padding: 0 10px;
+    flex: 1 1 300px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.form-group label i {
+    margin-right: 5px;
+    color: var(--primary-color);
+}
+
+/* Form Enhancements */
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--shadow-color);
+    transform: translateY(-2px);
+}
+
+/* Animation Enhancements */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.measurement-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Improved Button Styles */
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px var(--shadow-color);
+}
+
+.btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+/* Additional Responsive Improvements */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .card {
+        padding: 20px 15px;
+    }
+    
+    .search-container {
+        flex-direction: column;
+    }
+    
+    #searchButton {
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        margin: 0;
+    }
+    
+    .form-group {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .logo h1 {
+        font-size: 2rem;
+    }
+    
+    header p {
+        font-size: 0.9rem;
+    }
+    
+    .measurement-card {
+        width: 100%;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .measurement-form,
+    .measurements-list {
+        padding: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 1.1rem;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+    
+    .form-row {
+        margin: 0;
+    }
+    
+    .form-group {
+        padding: 0 5px;
+        margin-bottom: 15px;
+        flex: 1 1 100%;
+    }
+
+    .measurement-card {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+
+    .nav-item {
+        padding: 12px 0;
+    }
+
+    .nav-item i {
+        font-size: 1.6rem;
+        margin-bottom: 6px;
+    }
+
+    .nav-item span {
+        font-size: 0.9rem;
+    }
+
+    .bottom-nav {
+        padding: 15px 0;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+    }
+
+    .container {
+        padding-bottom: 90px;
+    }
+    
+    /* Touch-friendly improvements */
+    .btn, 
+    input[type="submit"],
+    input[type="reset"],
+    select,
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+        min-height: 48px; /* Minimum touch target size */
+    }
+    
+    .form-group label {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 769px) {
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+    }
+    
+    .form-group {
+        flex: 1 1 calc(50% - 20px);
+        margin: 0 10px 20px 10px;
+        padding: 0;
+    }
+    
+    .dynamic-fields .form-group {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+/* Dynamic Fields Styling */
+.dynamic-fields {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.dynamic-fields h3 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.dynamic-fields .form-row {
+    margin: 0 -10px;
+}
+
+.dynamic-fields .form-group {
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .dynamic-fields {
+        padding: 12px;
+    }
+    
+    .dynamic-fields .form-row {
+        margin: 0;
+    }
+    
+    .dynamic-fields .form-group {
+        padding: 0 5px;
+    }
+}
+
+/* Remove duplicate media queries */
+@media (min-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .measurement-form,
+    .measurements-list {
+        padding: 2rem;
+    }
+
+    .form-actions {
+        flex-direction: row;
+    }
+
+    .btn {
+        width: auto;
+    }
+}
+
+/* Button Styles */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #3a5a84;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: var(--text-color);
+}
+
+.btn-secondary:hover {
+    background-color: #d0d0d0;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
+}
+
+/* Measurements List Styles */
+.measurements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.measurement-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    border-left: 3px solid var(--accent-color);
+    overflow: hidden;
+}
+
+.measurement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.measurement-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.measurement-card h3:before {
+    content: '\f007';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+}
+
+.measurement-card p {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--light-text);
+    font-size: 0.95rem;
+}
+
+.measurement-card p strong {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.measurements-list {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.measurements-list:hover {
+    transform: translateY(-5px);
+}
+
+.measurements-list h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.measurement-item {
+    padding: 1.2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    background-color: var(--card-bg);
+}
+
+.measurement-item:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 12px rgba(79, 195, 247, 0.15);
+}
+
+.delete-btn {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    width: 100%;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+.delete-btn i {
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .measurement-form,
+    .measurements-list {
+        padding: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 1.1rem;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+
+    .measurement-card {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+
+    .nav-item {
+        padding: 12px 0;
+    }
+
+    .nav-item i {
+        font-size: 1.6rem;
+        margin-bottom: 6px;
+    }
+
+    .nav-item span {
+        font-size: 0.9rem;
+    }
+
+    .bottom-nav {
+        padding: 15px 0;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+    }
+
+    .container {
+        padding-bottom: 90px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .measurements-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .container {
+        padding: 25px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .measurements-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+    }
+
+    .container {
+        padding: 30px;
+        max-width: 1400px;
+    }
+}
+
+.measurement-item:last-child {
+    margin-bottom: 0;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .measurement-form,
+    .measurements-list {
+        padding: 1rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-group {
+        display: inline-block;
+        width: calc(50% - 1rem);
+        margin-right: 1rem;
+    }
+
+    .form-group:nth-child(2n) {
+        margin-right: 0;
+    }
+
+    .dynamic-fields .form-group {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+/* Bottom Navigation Bar Styles - Enhanced */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-top: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    width: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #7f8c8d;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-item:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-item.active:after {
+    width: 50%;
+}
+
+.nav-item.active {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.nav-item:hover:after {
+    width: 30%;
+}
+
+.nav-item:hover {
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* Add padding to the bottom of the container to prevent content from being hidden behind the nav bar */
+body {
+    padding-bottom: 70px;
+}
+
+/* Measurement Details Styles */
+.measurement-details {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.measurement-detail-card {
+    padding: 1.5rem;
+}
+
+.measurement-detail-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.measurement-detail-card p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.measurement-detail-card .back-btn {
+    margin-top: 1.5rem;
+}
+
+/* Enhance mobile experience */
+@media (max-width: 768px) {
+    .bottom-nav {
+        padding: 12px 0;
+    }
+    
+    .nav-item i {
+        font-size: 1.3rem;
+    }
+    
+    .container {
+        padding-bottom: 80px;
+    }
+    
+    .measurement-item {
+        transition: background-color 0.2s ease;
+    }
+    
+    .measurement-item:hover, .measurement-item:active {
+        background-color: #f8f9fa;
+    }
+}
+
+/* Search Section Styles */
+.search-section {
+    transition: all 0.3s ease;
+}
+
+.search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);
+    outline: none;
+}
+
+.search-results {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    min-height: 50px;
+    transition: all 0.3s ease;
+}
+
+.copyright {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.search-result-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.search-result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-info {
+    flex: 1;
+}
+
+.search-result-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-btn {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
+}
+
+.delete-btn i {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+    .search-result-card {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .search-result-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .delete-btn {
+        padding: 10px 15px;
+        width: 100%;
+    }
+}
+
+/* Additional Responsive Improvements */
+@media (max-width: 480px) {
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-group {
+        width: 100%;
+    }
+    
+    .logo h1 {
+        font-size: 2rem;
+    }
+    
+    header p {
+        font-size: 0.9rem;
+    }
+    
+    .measurement-card {
+        width: 100%;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (max-width: 768px) {
+    .btn, 
+    input[type="submit"],
+    input[type="reset"],
+    select,
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+        min-height: 48px; /* Minimum touch target size */
+    }
+    
+    .nav-item {
+        padding: 15px 0;
+    }
+    
+    .form-group label {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .measurement-form,
+    .measurements-list {
+        padding: 1rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .form-group {
+        display: inline-block;
+        width: calc(50% - 1rem);
+        margin-right: 1rem;
+    }
+
+    .form-group:nth-child(2n) {
+        margin-right: 0;
+    }
+
+    .dynamic-fields .form-group {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+/* Bottom Navigation Bar Styles */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .bottom-nav.keyboard-open {
+        transform: translateY(100%);
+        visibility: hidden;
+    }
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+    width: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #7f8c8d;
+}
+
+.nav-item i {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.nav-item span {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.nav-item.active {
+    color: var(--primary-color);
+}
+
+.nav-item:hover {
+    color: var(--primary-color);
+}
+
+/* Add padding to the bottom of the container to prevent content from being hidden behind the nav bar */
+body {
+    padding-bottom: 70px;
+}
+
+/* Measurement Details Styles */
+.measurement-details {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.measurement-detail-card {
+    padding: 1.5rem;
+}
+
+.measurement-detail-card h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.measurement-detail-card p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.measurement-detail-card .back-btn {
+    margin-top: 1.5rem;
+}
+
+/* Enhance mobile experience */
+@media (max-width: 768px) {
+    .bottom-nav {
+        padding: 12px 0;
+    }
+    
+    .nav-item i {
+        font-size: 1.3rem;
+    }
+    
+    .container {
+        padding-bottom: 80px;
+    }
+    
+    .measurement-item {
+        transition: background-color 0.2s ease;
+    }
+    
+    .measurement-item:hover, .measurement-item:active {
+        background-color: #f8f9fa;
+    }
+}

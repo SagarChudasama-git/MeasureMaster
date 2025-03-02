@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeasureMaster - Tailor Measurements App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-ruler-combined"></i>
+                <h1>MeasureMaster</h1>
+            </div>
+            <p>Tailor Measurements Management</p>
+        </header>
+
+        <main>
+            <form id="measurementForm" class="measurement-form card">
+                <h2><i class="fas fa-user-plus"></i> New Client Measurement</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientName">Client Name</label>
+                        <input type="text" id="clientName" name="clientName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="length">Length</label>
+                        <input type="number" id="length" name="length" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wrist">Wrist</label>
+                        <input type="number" id="wrist" name="wrist" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hip">Hip</label>
+                        <input type="number" id="hip" name="hip" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shoulder">Shoulder</label>
+                        <input type="number" id="shoulder" name="shoulder" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="slive">Slive</label>
+                        <input type="number" id="slive" name="slive" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sliveMori">Slive Mori</label>
+                        <input type="number" id="sliveMori" name="sliveMori" step="0.1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="type"><i class="fas fa-tags"></i> Type</label>
+                    <select id="type" name="type">
+                        <option value="">Select Type</option>
+                        <option value="salvar">Salvar</option>
+                        <option value="pant">Pant</option>
+                    </select>
+                </div>
+
+                <div id="salvarFields" class="dynamic-fields" style="display: none;">
+                    <h3>Salvar Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="salvarLength">Salvar Length</label>
+                            <input type="number" id="salvarLength" name="salvarLength" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="salvarMori">Salvar Mori</label>
+                            <input type="number" id="salvarMori" name="salvarMori" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pantFields" class="dynamic-fields" style="display: none;">
+                    <h3>Pant Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pantLength">Pant Length</label>
+                            <input type="number" id="pantLength" name="pantLength" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="pantHip">Pant Hip</label>
+                            <input type="number" id="pantHip" name="pantHip" step="0.1">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="waist">Waist</label>
+                            <input type="number" id="waist" name="waist" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="knee">Knee</label>
+                            <input type="number" id="knee" name="knee" step="0.1">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="thai">Thai</label>
+                            <input type="number" id="thai" name="thai" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="pantMori">Pant Mori</label>
+                            <input type="number" id="pantMori" name="pantMori" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Measurement</button>
+                    <button type="reset" class="btn btn-secondary"><i class="fas fa-undo"></i> Clear Form</button>
+                </div>
+            </form>
+
+            <section class="measurements-list card">
+                <h2><i class="fas fa-list"></i> Stored Measurements</h2>
+                <div id="measurementsList" class="measurements-grid"></div>
+                <div class="copyright">
+                    © 2025 MeasureMaster <br>by Sagar Chudasama. All rights reserved.
+                </div>
+            </section>
+            
+            <section id="searchSection" class="search-section card" style="display: none;">
+                <h2><i class="fas fa-search"></i> Search Clients</h2>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search by client name...">
+                    <button id="searchButton" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <div id="searchResults" class="search-results">
+                    <!-- Search results will be dynamically populated here -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" id="nav-measurements">
+            <i class="fas fa-ruler"></i>
+            <span>Measurements</span>
+        </div>
+        <div class="nav-item" id="nav-search">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+        </div>
+    </nav>
+    
+    <script src="script.js"></script>
+    <script src="keyboard.js"></script>
+</body>
+</html>
