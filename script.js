@@ -135,11 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (measurement.type === 'pant') {
                 specificMeasurements = `
                     <p>Pant Length: ${measurement.pantLength}</p>
+                    <p>Pant Khistak: ${measurement.pantKhistak}</p>
                     <p>Pant Hip: ${measurement.pantHip}</p>
                     <p>Waist: ${measurement.waist}</p>
-                    <p>Knee: ${measurement.knee}</p>
-                    <p>Thai: ${measurement.thai}</p>
                     <p>Pant Mori: ${measurement.pantMori}</p>
+                    <p>Knee: ${measurement.knee}</p>
+                    <p>Thai: ${measurement.thai}</p> 
                 `;
             }
             
@@ -174,11 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (measurement.type === 'pant') {
             specificMeasurements = `
                 <p><strong>Pant Length:</strong> ${measurement.pantLength}</p>
+                <p><strong>Pant Khistak:</strong> ${measurement.pantKhistak}</p>
                 <p><strong>Pant Hip:</strong> ${measurement.pantHip}</p>
                 <p><strong>Waist:</strong> ${measurement.waist}</p>
-                <p><strong>Knee:</strong> ${measurement.knee}</p>
-                <p><strong>Thai:</strong> ${measurement.thai}</p>
                 <p><strong>Pant Mori:</strong> ${measurement.pantMori}</p>
+                <p><strong>Knee:</strong> ${measurement.knee}</p>
+                <p><strong>Thai:</strong> ${measurement.thai}</p>  
             `;
         }
         
@@ -255,11 +257,12 @@ document.addEventListener('DOMContentLoaded', () => {
             measurementData.salvarMori = formData.get('salvarMori') || '';
         } else if (measurementData.type === 'pant') {
             measurementData.pantLength = formData.get('pantLength') || '';
+            measurementData.pantKhistak = formData.get('pantKhistak') || '';
             measurementData.pantHip = formData.get('pantHip') || '';
             measurementData.waist = formData.get('waist') || '';
+            measurementData.pantMori = formData.get('pantMori') || '';
             measurementData.knee = formData.get('knee') || '';
             measurementData.thai = formData.get('thai') || '';
-            measurementData.pantMori = formData.get('pantMori') || '';
         }
 
         // Set today's date as default when the form loads
@@ -301,11 +304,12 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (measurement.type === 'pant') {
                 specificMeasurements = `
                     <p>Pant Length: ${measurement.pantLength}</p>
+                    <p>Pant Khistak: ${measurement.pantKhistak}</p>
                     <p>Pant Hip: ${measurement.pantHip}</p>
                     <p>Waist: ${measurement.waist}</p>
+                    <p>Pant Mori: ${measurement.pantMori}</p>
                     <p>Knee: ${measurement.knee}</p>
                     <p>Thai: ${measurement.thai}</p>
-                    <p>Pant Mori: ${measurement.pantMori}</p>
                 `;
             }
 
