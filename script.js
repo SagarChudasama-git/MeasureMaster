@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Pant Length: ${measurement.pantLength}</p>
                     <p>Pant Khistak: ${measurement.pantKhistak}</p>
                     <p>Pant Hip: ${measurement.pantHip}</p>
-                    <p>Waist: ${measurement.waist}</p>
+                    <p>West: ${measurement.west}</p>
                     <p>Pant Mori: ${measurement.pantMori}</p>
                     <p>Knee: ${measurement.knee}</p>
                     <p>Thai: ${measurement.thai}</p> 
@@ -149,7 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>Date: ${measurement.date}</p>
                 <p>Type: ${measurement.type}</p>
                 <p>Length: ${measurement.length}</p>
-                <p>Wrist: ${measurement.wrist}</p>
+                <p>Chest: ${measurement.chest}</p>
+                <p>West: ${measurement.west}</p>
                 <p>Hip: ${measurement.hip}</p>
                 <p>Shoulder: ${measurement.shoulder}</p>
                 <p>Slive: ${measurement.slive}</p>
@@ -177,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>Pant Length:</strong> ${measurement.pantLength}</p>
                 <p><strong>Pant Khistak:</strong> ${measurement.pantKhistak}</p>
                 <p><strong>Pant Hip:</strong> ${measurement.pantHip}</p>
-                <p><strong>Waist:</strong> ${measurement.waist}</p>
+                <p><strong>West:</strong> ${measurement.west}</p>
                 <p><strong>Pant Mori:</strong> ${measurement.pantMori}</p>
                 <p><strong>Knee:</strong> ${measurement.knee}</p>
                 <p><strong>Thai:</strong> ${measurement.thai}</p>  
@@ -190,7 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>Date:</strong> ${measurement.date}</p>
                 <p><strong>Type:</strong> ${measurement.type}</p>
                 <p><strong>Length:</strong> ${measurement.length}</p>
-                <p><strong>Wrist:</strong> ${measurement.wrist}</p>
+                <p><strong>Chest:</strong> ${measurement.chest}</p>
+                <p><strong>West:</strong> ${measurement.west}</p>
                 <p><strong>Hip:</strong> ${measurement.hip}</p>
                 <p><strong>Shoulder:</strong> ${measurement.shoulder}</p>
                 <p><strong>Slive:</strong> ${measurement.slive}</p>
@@ -243,7 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
             clientName: formData.get('clientName'),
             date: formData.get('date'),
             length: formData.get('length') || '',
-            wrist: formData.get('wrist') || '',
+            chest: formData.get('chest') || '',
+            west: formData.get('west') || '',
             hip: formData.get('hip') || '',
             shoulder: formData.get('shoulder') || '',
             slive: formData.get('slive') || '',
@@ -259,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
             measurementData.pantLength = formData.get('pantLength') || '';
             measurementData.pantKhistak = formData.get('pantKhistak') || '';
             measurementData.pantHip = formData.get('pantHip') || '';
-            measurementData.waist = formData.get('waist') || '';
+            measurementData.west = formData.get('west') || '';
             measurementData.pantMori = formData.get('pantMori') || '';
             measurementData.knee = formData.get('knee') || '';
             measurementData.thai = formData.get('thai') || '';
@@ -306,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Pant Length: ${measurement.pantLength}</p>
                     <p>Pant Khistak: ${measurement.pantKhistak}</p>
                     <p>Pant Hip: ${measurement.pantHip}</p>
-                    <p>Waist: ${measurement.waist}</p>
+                    <p>West: ${measurement.west}</p>
                     <p>Pant Mori: ${measurement.pantMori}</p>
                     <p>Knee: ${measurement.knee}</p>
                     <p>Thai: ${measurement.thai}</p>
@@ -319,7 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Date: ${measurement.date}</p>
                     <p>Type: ${measurement.type}</p>
                     <p>Length: ${measurement.length}</p>
-                    <p>Wrist: ${measurement.wrist}</p>
+                    <p>Chest: ${measurement.chest}</p>
+                    <p>West: ${measurement.west}</p>
                     <p>Hip: ${measurement.hip}</p>
                     <p>Shoulder: ${measurement.shoulder}</p>
                     <p>Slive: ${measurement.slive}</p>
