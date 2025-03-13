@@ -1,54 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Bottom Navigation Bar Functionality
     const navMeasurements = document.getElementById('nav-measurements');
+    const navStored = document.getElementById('nav-stored');
     const navSearch = document.getElementById('nav-search');
     const measurementForm = document.getElementById('measurementForm');
+    const editMeasurementForm = document.getElementById('editMeasurementForm');
     const measurementsListSection = document.querySelector('.measurements-list');
+    const storedSection = document.querySelector('.stored-section');
     
-    // Create search section (initially hidden)
-    const searchSection = document.createElement('section');
-    searchSection.className = 'measurement-form';
-    searchSection.style.display = 'none';
-    searchSection.innerHTML = `
-        <h2>Search Measurements</h2>
-        <div class="form-group">
-            <label for="searchClient">Search by Client Name</label>
-            <input type="text" id="searchClient" name="searchClient" placeholder="Start typing to search...">
-        </div>
-        <div class="form-actions">
-            <button type="button" id="searchBtn" class="btn btn-primary">Search</button>
-        </div>
-        <div id="searchResults" class="dynamic-fields" style="margin-top: 20px;"></div>
-        <div id="measurementDetails" class="measurement-details" style="display: none; margin-top: 20px;"></div>
-    `;
-    
-    // Insert search section after measurement form
-    measurementForm.parentNode.insertBefore(searchSection, measurementsListSection);
+    const searchSection = document.getElementById('searchSection');
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const searchResults = document.getElementById('searchResults');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
     
     // Navigation event listeners
     navMeasurements.addEventListener('click', () => {
         navMeasurements.classList.add('active');
+        navStored.classList.remove('active');
         navSearch.classList.remove('active');
         measurementForm.style.display = 'block';
+        editMeasurementForm.style.display = 'none';
+        storedSection.style.display = 'none';
+        searchSection.style.display = 'none';
+        measurementsListSection.style.display = 'none';
+    });
+
+    navStored.addEventListener('click', () => {
+        navMeasurements.classList.remove('active');
+        navStored.classList.add('active');
+        navSearch.classList.remove('active');
+        measurementForm.style.display = 'none';
+        editMeasurementForm.style.display = 'none';
+        storedSection.style.display = 'block';
         searchSection.style.display = 'none';
         measurementsListSection.style.display = 'block';
     });
     
     navSearch.addEventListener('click', () => {
-        navSearch.classList.add('active');
         navMeasurements.classList.remove('active');
+        navStored.classList.remove('active');
+        navSearch.classList.add('active');
         measurementForm.style.display = 'none';
+        editMeasurementForm.style.display = 'none';
+        storedSection.style.display = 'none';
         searchSection.style.display = 'block';
         measurementsListSection.style.display = 'none';
     });
     
-    // Search functionality
-    const searchClient = document.getElementById('searchClient');
-    const searchResults = document.getElementById('searchResults');
+    // Cancel edit button event listener
+    cancelEditBtn.addEventListener('click', () => {
+        editMeasurementForm.style.display = 'none';
+        // Show the appropriate section based on which nav item is active
+        if (navMeasurements.classList.contains('active')) {
+            measurementForm.style.display = 'block';
+        } else if (navStored.classList.contains('active')) {
+            storedSection.style.display = 'block';
+            measurementsListSection.style.display = 'block';
+        } else if (navSearch.classList.contains('active')) {
+            searchSection.style.display = 'block';
+        }
+    });
     
+    // Search functionality
     // Real-time search as user types
-    searchClient.addEventListener('input', () => {
-        const searchTerm = searchClient.value.toLowerCase();
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
         const measurements = JSON.parse(localStorage.getItem('measurements') || '[]');
         const filteredMeasurements = measurements.filter(m => 
             m.clientName.toLowerCase().includes(searchTerm)
@@ -60,71 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function displaySearchResults(results) {
         searchResults.innerHTML = '';
         
-        results.forEach(measurement => {
-            const resultCard = document.createElement('div');
-            resultCard.className = 'measurement-item';
-            
-            resultCard.innerHTML = `
-                <div class="measurement-info">
-                    <h3>${measurement.clientName}</h3>
-                    <p>Date: ${measurement.date}</p>
-                    <p>Type: ${measurement.type}</p>
-                </div>
-                <div class="measurement-actions">
-                    <button class="delete-btn btn btn-danger" data-id="${measurement.id}">
-                        <i class="fas fa-trash-alt"></i> Delete
-                    </button>
-                </div>
-            `;
-            
-            searchResults.appendChild(resultCard);
-            
-            // Add delete functionality
-            const deleteBtn = resultCard.querySelector('.delete-btn');
-            deleteBtn.addEventListener('click', () => {
-                const id = parseInt(deleteBtn.getAttribute('data-id'));
-                deleteMeasurement(id);
-                // Refresh search results
-                const searchTerm = searchClient.value.toLowerCase();
-                const measurements = JSON.parse(localStorage.getItem('measurements') || '[]');
-                const filteredMeasurements = measurements.filter(m => 
-                    m.clientName.toLowerCase().includes(searchTerm)
-                );
-                displaySearchResults(filteredMeasurements);
-            });
-        });
-    }
-    
-    // Also keep the button functionality as a fallback
-    const searchBtn = document.getElementById('searchBtn');
-    searchBtn.addEventListener('click', () => {
-        const searchTerm = searchClient.value.toLowerCase().trim();
-        const measurements = JSON.parse(localStorage.getItem('measurements') || '[]');
-        
-        const results = measurements.filter(measurement => 
-            measurement.clientName.toLowerCase().includes(searchTerm)
-        );
-        
-        displaySearchResults(results);
-    });
-    
-    function displaySearchResults(results) {
-        searchResults.innerHTML = '';
-        
         if (results.length === 0) {
             searchResults.innerHTML = '<p>No results found</p>';
             return;
         }
         
         results.forEach(measurement => {
-            const item = document.createElement('div');
-            item.className = 'measurement-item';
-            item.style.cursor = 'pointer';
-            
-            // Add click event to view full details
-            item.addEventListener('click', () => {
-                viewMeasurementDetails(measurement);
-            });
+            const resultCard = document.createElement('div');
+            resultCard.className = 'measurement-item';
             
             let specificMeasurements = '';
             if (measurement.type === 'salvar') {
@@ -140,27 +100,70 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>West: ${measurement.west}</p>
                     <p>Pant Mori: ${measurement.pantMori}</p>
                     <p>Knee: ${measurement.knee}</p>
-                    <p>Thai: ${measurement.thai}</p> 
+                    <p>Thai: ${measurement.thai}</p>
                 `;
             }
             
-            item.innerHTML = `
-                <h3>${measurement.clientName}</h3>
-                <p>Date: ${measurement.date}</p>
-                <p>Type: ${measurement.type}</p>
-                <p>Length: ${measurement.length}</p>
-                <p>Chest: ${measurement.chest}</p>
-                <p>West: ${measurement.west}</p>
-                <p>Hip: ${measurement.hip}</p>
-                <p>Shoulder: ${measurement.shoulder}</p>
-                <p>Slive: ${measurement.slive}</p>
-                <p>Slive Mori: ${measurement.sliveMori}</p>
-                ${specificMeasurements}
+            resultCard.innerHTML = `
+                <div class="measurement-info">
+                    <h3>${measurement.clientName}</h3>
+                    <p>Date: ${measurement.date}</p>
+                    <p>Type: ${measurement.type}</p>
+                    <p>Length: ${measurement.length}</p>
+                    <p>Chest: ${measurement.chest}</p>
+                    <p>West: ${measurement.west}</p>
+                    <p>Hip: ${measurement.hip}</p>
+                    <p>Shoulder: ${measurement.shoulder}</p>
+                    <p>Slive: ${measurement.slive}</p>
+                    <p>Slive Mori: ${measurement.sliveMori}</p>
+                    ${specificMeasurements}
+                </div>
+                <div class="search-result-actions">
+                    <button class="edit-btn btn btn-primary" style="margin-top: 12px;" data-id="${measurement.id}">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>
+                    <button class="delete-btn btn btn-danger" data-id="${measurement.id}">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                </div>
             `;
             
-            searchResults.appendChild(item);
+            searchResults.appendChild(resultCard);
+            
+            // Add edit functionality
+            const editBtn = resultCard.querySelector('.edit-btn');
+            editBtn.addEventListener('click', () => {
+                const id = parseInt(editBtn.getAttribute('data-id'));
+                editMeasurement(id);
+            });
+            
+            // Add delete functionality
+            const deleteBtn = resultCard.querySelector('.delete-btn');
+            deleteBtn.addEventListener('click', () => {
+                const id = parseInt(deleteBtn.getAttribute('data-id'));
+                deleteMeasurement(id);
+                // Refresh search results
+                const searchTerm = searchInput.value.toLowerCase();
+                const measurements = JSON.parse(localStorage.getItem('measurements') || '[]');
+                const filteredMeasurements = measurements.filter(m => 
+                    m.clientName.toLowerCase().includes(searchTerm)
+                );
+                displaySearchResults(filteredMeasurements);
+            });
         });
     }
+    
+    // Search button functionality
+    searchButton.addEventListener('click', () => {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const measurements = JSON.parse(localStorage.getItem('measurements') || '[]');
+        
+        const results = measurements.filter(measurement => 
+            measurement.clientName.toLowerCase().includes(searchTerm)
+        );
+        
+        displaySearchResults(results);
+    });
     
     // Function to view full measurement details
     function viewMeasurementDetails(measurement) {
@@ -217,6 +220,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const salvarFields = document.getElementById('salvarFields');
     const pantFields = document.getElementById('pantFields');
     const measurementsList = document.getElementById('measurementsList');
+    
+    // Edit form elements
+    const editForm = document.getElementById('editMeasurementForm');
+    const editTypeSelect = document.getElementById('editType');
+    const editSalvarFields = document.getElementById('editSalvarFields');
+    const editPantFields = document.getElementById('editPantFields');
 
     // Load existing measurements
     loadMeasurements();
@@ -230,6 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update required attributes based on selection
         const salvarInputs = salvarFields.querySelectorAll('input');
         const pantInputs = pantFields.querySelectorAll('input');
+
+        salvarInputs.forEach(input => input.required = selectedType === 'salvar');
+        pantInputs.forEach(input => input.required = selectedType === 'pant');
+    });
+    
+    // Handle edit type selection change
+    editTypeSelect.addEventListener('change', () => {
+        const selectedType = editTypeSelect.value;
+        editSalvarFields.style.display = selectedType === 'salvar' ? 'block' : 'none';
+        editPantFields.style.display = selectedType === 'pant' ? 'block' : 'none';
+
+        // Update required attributes based on selection
+        const salvarInputs = editSalvarFields.querySelectorAll('input');
+        const pantInputs = editPantFields.querySelectorAll('input');
 
         salvarInputs.forEach(input => input.required = selectedType === 'salvar');
         pantInputs.forEach(input => input.required = selectedType === 'pant');
@@ -268,12 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
             measurementData.thai = formData.get('thai') || '';
         }
 
-        // Set today's date as default when the form loads
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('date').value = today;
-        });
-
         // Save to local storage
         saveMeasurement(measurementData);
 
@@ -283,6 +300,105 @@ document.addEventListener('DOMContentLoaded', () => {
         pantFields.style.display = 'none';
         loadMeasurements();
     });
+    
+    // Handle edit form submission
+    editForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+    
+        const formData = new FormData(editForm);
+        const measurementId = parseInt(formData.get('editMeasurementId'));
+        const measurementData = {
+            id: measurementId,
+            clientName: formData.get('editClientName'),
+            date: formData.get('editDate'),
+            length: formData.get('editLength') || '',
+            chest: formData.get('editChest') || '',
+            west: formData.get('editWest') || '',
+            hip: formData.get('editHip') || '',
+            shoulder: formData.get('editShoulder') || '',
+            slive: formData.get('editSlive') || '',
+            sliveMori: formData.get('editSliveMori') || '',
+            type: formData.get('editType')
+        };
+    
+        // Add type-specific measurements
+        if (measurementData.type === 'salvar') {
+            measurementData.salvarLength = formData.get('editSalvarLength') || '';
+            measurementData.salvarMori = formData.get('editSalvarMori') || '';
+        } else if (measurementData.type === 'pant') {
+            measurementData.pantLength = formData.get('editPantLength') || '';
+            measurementData.pantKhistak = formData.get('editPantKhistak') || '';
+            measurementData.pantHip = formData.get('editPantHip') || '';
+            measurementData.pantMori = formData.get('editPantMori') || '';
+            measurementData.knee = formData.get('editKnee') || '';
+            measurementData.thai = formData.get('editThai') || '';
+        }
+    
+        // Update measurement in local storage
+        let measurements = JSON.parse(localStorage.getItem('measurements') || '[]');
+        const index = measurements.findIndex(m => m.id === measurementId);
+        if (index !== -1) {
+            measurements[index] = measurementData;
+            localStorage.setItem('measurements', JSON.stringify(measurements));
+        }
+    
+        // Reset form and update UI
+        editForm.style.display = 'none';
+        document.getElementById('searchResults').style.display = 'block';
+        loadMeasurements();
+    
+        // Refresh search results
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredMeasurements = measurements.filter(m => 
+            m.clientName.toLowerCase().includes(searchTerm)
+        );
+        displaySearchResults(filteredMeasurements);
+    });
+    
+    function editMeasurement(id) {
+        const measurements = JSON.parse(localStorage.getItem('measurements') || '[]');
+        const measurement = measurements.find(m => m.id === id);
+        
+        if (!measurement) return;
+        
+        // Hide search results and show edit form
+        document.getElementById('searchResults').style.display = 'none';
+        const editForm = document.getElementById('editMeasurementForm');
+        editForm.style.display = 'block';
+        
+        // Populate form fields
+        document.getElementById('editMeasurementId').value = measurement.id;
+        document.getElementById('editClientName').value = measurement.clientName;
+        document.getElementById('editDate').value = measurement.date;
+        document.getElementById('editLength').value = measurement.length;
+        document.getElementById('editChest').value = measurement.chest;
+        document.getElementById('editWest').value = measurement.west;
+        document.getElementById('editHip').value = measurement.hip;
+        document.getElementById('editShoulder').value = measurement.shoulder;
+        document.getElementById('editSlive').value = measurement.slive;
+        document.getElementById('editSliveMori').value = measurement.sliveMori;
+        document.getElementById('editType').value = measurement.type;
+        
+        // Show/hide and populate type-specific fields
+        const editSalvarFields = document.getElementById('editSalvarFields');
+        const editPantFields = document.getElementById('editPantFields');
+        
+        if (measurement.type === 'salvar') {
+            editSalvarFields.style.display = 'block';
+            editPantFields.style.display = 'none';
+            document.getElementById('editSalvarLength').value = measurement.salvarLength;
+            document.getElementById('editSalvarMori').value = measurement.salvarMori;
+        } else if (measurement.type === 'pant') {
+            editSalvarFields.style.display = 'none';
+            editPantFields.style.display = 'block';
+            document.getElementById('editPantLength').value = measurement.pantLength;
+            document.getElementById('editPantKhistak').value = measurement.pantKhistak;
+            document.getElementById('editPantHip').value = measurement.pantHip;
+            document.getElementById('editPantMori').value = measurement.pantMori;
+            document.getElementById('editKnee').value = measurement.knee;
+            document.getElementById('editThai').value = measurement.thai;
+        }
+    }
 
     function saveMeasurement(data) {
         let measurements = JSON.parse(localStorage.getItem('measurements') || '[]');

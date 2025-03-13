@@ -634,6 +634,7 @@ header p {
     border-radius: 4px;
     cursor: pointer;
     float: right;
+    width: 100%;
 }
 
 .delete-btn:hover {
@@ -861,6 +862,14 @@ body {
 .search-result-actions {
     display: flex;
     gap: 10px;
+    align-items: center;
+}
+
+.search-result-actions .btn {
+    min-width: 100px;
+    height: 40px;
+    padding: 8px 15px;
+    font-size: 0.95rem;
 }
 
 .delete-btn {

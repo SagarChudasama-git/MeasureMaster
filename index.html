@@ -138,8 +138,129 @@
                 </div>
             </form>
 
-            <section class="measurements-list card">
-                <h2><i class="fas fa-list"></i> Stored Measurements</h2>
+            <!-- Edit Measurement Form Section -->
+            <form id="editMeasurementForm" class="measurement-form card" style="display: none;">
+                <h2><i class="fas fa-edit"></i> Edit Measurement</h2>
+                <input type="hidden" id="editMeasurementId" name="editMeasurementId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editClientName">Client Name</label>
+                        <input type="text" id="editClientName" name="editClientName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editDate">Date</label>
+                        <input type="date" id="editDate" name="editDate" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editLength">Length</label>
+                        <input type="number" id="editLength" name="editLength" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editChest">Chest</label>
+                        <input type="number" id="editChest" name="editChest" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editWest">West</label>
+                        <input type="number" id="editWest" name="editWest" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editHip">Hip</label>
+                        <input type="number" id="editHip" name="editHip" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editShoulder">Shoulder</label>
+                        <input type="number" id="editShoulder" name="editShoulder" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editSlive">Slive</label>
+                        <input type="number" id="editSlive" name="editSlive" step="0.1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editSliveMori">Slive Mori</label>
+                        <input type="number" id="editSliveMori" name="editSliveMori" step="0.1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editType"><i class="fas fa-tags"></i> Type</label>
+                    <select id="editType" name="editType">
+                        <option value="">Select Type</option>
+                        <option value="salvar">Salvar</option>
+                        <option value="pant">Pant</option>
+                    </select>
+                </div>
+
+                <div id="editSalvarFields" class="dynamic-fields" style="display: none;">
+                    <h3>Salvar Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editSalvarLength">Salvar Length</label>
+                            <input type="number" id="editSalvarLength" name="editSalvarLength" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="editSalvarMori">Salvar Mori</label>
+                            <input type="number" id="editSalvarMori" name="editSalvarMori" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="editPantFields" class="dynamic-fields" style="display: none;">
+                    <h3>Pant Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editPantLength">Pant Length</label>
+                            <input type="number" id="editPantLength" name="editPantLength" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPantKhistak">Pant Khistak</label>
+                            <input type="number" id="editPantKhistak" name="editPantKhistak" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPantHip">Pant Hip</label>
+                            <input type="number" id="editPantHip" name="editPantHip" step="0.1">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editPantWest">West</label>
+                            <input type="number" id="editPantWest" name="editPantWest" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPantMori">Pant Mori</label>
+                            <input type="number" id="editPantMori" name="editPantMori" step="0.1">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editKnee">Knee</label>
+                            <input type="number" id="editKnee" name="editKnee" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="editThai">Thai</label>
+                            <input type="number" id="editThai" name="editThai" step="0.1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update Measurement</button>
+                    <button type="button" id="cancelEditBtn" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</button>
+                </div>
+            </form>
+
+            <section id="storedSection" class="stored-section card" style="display: none;">
+                <h2 style="margin-bottom: 30px;"><i class="fas fa-list"></i> Stored Measurements</h2>
                 <div id="measurementsList" class="measurements-grid"></div>
                 <div class="copyright">
                     © 2025 MeasureMaster <br>by Sagar Chudasama. All rights reserved.
@@ -163,7 +284,11 @@
     <nav class="bottom-nav">
         <div class="nav-item active" id="nav-measurements">
             <i class="fas fa-ruler"></i>
-            <span>Measurements</span>
+            <span>New</span>
+        </div>
+        <div class="nav-item" id="nav-stored">
+            <i class="fas fa-list"></i>
+            <span>Stored</span>
         </div>
         <div class="nav-item" id="nav-search">
             <i class="fas fa-search"></i>
